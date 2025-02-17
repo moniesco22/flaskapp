@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from collections import Counter
+#from collections import Counter
 import sqlite3
 
 app = Flask(__name__)
@@ -17,7 +17,7 @@ app = Flask(__name__)
 #    return '<br>'.join(response)
 
 # This is the examples from class plus website example
-conn = sqlite3.connect('users.db')
+conn = sqlite3.connect('/home/ubuntu/flaskapp/users.db')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS users
           (username TEXT, password TEXT, firstname TEXT, lastname TEXT, email TEXT)''')
@@ -36,7 +36,7 @@ def register():
     lastname = request.form['lastname']
     email = request.form['email']
 
-    conn = sqlite3.connect('users.db')
+    conn = sqlite3.connect('/home/ubuntu/flaskapp/users.db')
     c = conn.cursor()
     c.execute("INSERT INTO users(username, password, firstname, lastname, email) VALUES(?, ?, ?, ?, ?)",
               (username, password, firstname, lastname, email))
@@ -47,7 +47,7 @@ def register():
 
 @app.route('/profile/<username>')
 def profile(username):
-    conn = sqlite3.connect('users.db')
+    conn = sqlite3.connect('/home/ubuntu/flaskapp/users.db')
     c = conn.cursor()
     c.execute("SELECT * FROM users WHERE username=?", (username,))
     user = c.fetchone()
@@ -58,3 +58,4 @@ def profile(username):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
