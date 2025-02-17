@@ -4,17 +4,17 @@ import sqlite3
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-     return 'Hello from Flask!'
+#@app.route('/')
+#def hello_world():
+#     return 'Hello from Flask!'
 
-@app.route('/countme/<input_str>')
-def count_me(input_str):
-    input_counter = Counter(input_str)
-    response = []
-    for letter, count in input_counter.most_common():
-        response.append('"{}": {}'.format(letter,count))
-    return '<br>'.join(response)
+#@app.route('/countme/<input_str>')
+#def count_me(input_str):
+#    input_counter = Counter(input_str)
+#    response = []
+#    for letter, count in input_counter.most_common():
+#        response.append('"{}": {}'.format(letter,count))
+#    return '<br>'.join(response)
 
 # This is the examples from class plus website example
 conn = sqlite3.connect('users.db')
@@ -57,4 +57,4 @@ def profile(username):
 
 
 if __name__ == '__main__':
-    app.run(debug=TRUE)
+    app.run(debug=True)
